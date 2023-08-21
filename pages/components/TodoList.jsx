@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/TodoList.module.scss";
 import { BsPlusCircleFill } from "react-icons/bs";
-import { AiOutlineCheckCircle, AiOutlineDelete } from "react-icons/ai";
+import TodoItem from "./TodoItem";
 
 export default function TodoList() {
   const [todo, setTodo] = useState([]);
   const [title, setTitle] = useState("");
   const [errorTitle, setErrorTitle] = useState("");
   const [description, setDescription] = useState("");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +29,11 @@ export default function TodoList() {
     }
   };
 
+  const deleteTodo = (id) => {
+    const deleteTodo = todo.filter((item)=>item.id !== id)
+    localStorage.setItem("todoList", JSON.stringify(deleteTodo));
+    setTodo(deleteTodo);
+  };
 
 
   useEffect(() => {
@@ -36,6 +42,7 @@ export default function TodoList() {
       setTodo(saveTodo);
     }
   }, []);
+
 
   return (
     <div>
@@ -66,21 +73,8 @@ export default function TodoList() {
           </div>
         </form>
         <div className="list">
-          {/* <div className="list-item">
-                <h3>Task 1</h3>
-                <p>Description</p>
-            </div> */}
           {todo.map((data) => {
-            return (
-              <div className="list-item" key={data.id}>
-                <h3>{data.title}</h3>
-                <p>{data.description}</p>
-                <div className="btn">
-                  <AiOutlineDelete className="icon"  />
-                  <AiOutlineCheckCircle className="icon" />
-                </div>
-              </div>
-            );
+            return <TodoItem key={data.id} {...data} deleteTodo={deleteTodo}  />
           })}
         </div>
       </div>
