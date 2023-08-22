@@ -13,8 +13,8 @@ export default function Modal({id,deleteTodo,closeModal}) {
               <p>Do you want to delete</p>
           </div>
           <div className={s.modal_button}>
-              <button onClick={()=>deleteTodo(id)} className={`${s.modal_btn_yes} btn btn_danger`}>Yes</button>
-              <button onClick={()=> closeModal(false)} className={`${s.modal_btn_no} btn btn_success`}>No</button>
+              <button onClick={()=>deleteTodo(id)} className={`${s.modal_btn_yes} btn btn_success`}>Yes</button>
+              <button onClick={()=> closeModal(false)} className={`${s.modal_btn_no} btn btn_danger`}>No</button>
           </div>
       </div>
     </div>
