@@ -4,13 +4,15 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { AiOutlineClear } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
 import TodoItem from "./TodoItem";
+import dynamic from "next/dynamic";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 
 export default function TodoList() {
   const [todo, setTodo] = useState([]);
   const [title, setTitle] = useState("");
   const [errorTitle, setErrorTitle] = useState("");
   const [description, setDescription] = useState("");
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,34 +64,44 @@ export default function TodoList() {
 
   return (
     <div>
-      <h1>Todo List</h1>
-      <div className="h">
+      <h1 className={s.title_header}>Todo List</h1>
+      <div className={s.list_header}>
         <form className="input" onSubmit={handleSubmit}>
-          <div className="input-item">
+          <div className={s.list_input_item}>
             <label>Title</label>
             <input
               type="text"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
+              className={errorTitle === "" ? `${s.list_input}` : `${s.list_input} ${s.list_input_active}`}
             />
             <small className="alert">{errorTitle}</small>
           </div>
-          <div className="input-item">
+          <div className={s.list_input_item}>
             <label>Description</label>
-            <input
+            {/* <input
               type="text"
               onChange={(e) => setDescription(e.target.value)}
               value={description}
-            />
+            /> */}
+            <div className={s.list_description}>
+              <ReactQuill
+                value={description}
+                onChange={(e) => setDescription(e)}
+              />
+            </div>
           </div>
-          <div className="input-item">
-            <button type="submit">
-              <BsPlusCircleFill /> Add
-            </button>
-          </div>
+
+          <button type="submit" className={`${s.list_button} btn btn_success`}>
+            <BsPlusCircleFill /> Add
+          </button>
         </form>
-        <button onClick={clear}><AiOutlineClear /> Delete All</button>
-        <div className="list">
+
+        <button onClick={clear} className={`${s.list_button} btn btn_danger`}>
+          <AiOutlineClear /> Delete All
+        </button>
+
+        <div>
           {todo.map((data) => {
             return (
               <TodoItem

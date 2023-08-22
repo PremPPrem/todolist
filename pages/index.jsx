@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <>
+    <div className={s.home}>
       <Head>
         <title>TodoList</title>
         <meta name="description" content="TodoList" />
@@ -16,6 +16,6 @@ export default function Home() {
         <link rel="icon" href="/icon.ico" />
       </Head>
     <TodoList />
-    </>
+    </div>
   )
 }
