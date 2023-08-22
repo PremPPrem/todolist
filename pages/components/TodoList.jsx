@@ -79,11 +79,6 @@ export default function TodoList() {
           </div>
           <div className={s.list_input_item}>
             <label>Description</label>
-            {/* <input
-              type="text"
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-            /> */}
             <div className={s.list_description}>
               <ReactQuill
                 value={description}

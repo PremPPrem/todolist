@@ -7,46 +7,47 @@
   position: relative;
   word-wrap: break-word;
 
-  h3 {
+  .item_title {
     font-size: 2.25rem;
-    margin: 2rem 0 1rem;
+    margin: 2.5rem 0 1rem;
   }
-  ul,li {
+  ul,li,ol {
     margin: 0.5rem 1rem 0;
   }
 
   a{ display: block;}
 
-  .line {
-    border-top: 2px solid #ccc;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-  }
 
-  p {
-    display: inline;
+
+  .item_description {
     line-height: 1.5;
+  
+    
+    .item_no_description {
+      color: #9897a9;
+      font-weight: 500;
+    }
+
+    .item_button {
+      font-weight: 600;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #007bff;
+      margin-bottom: 0.5rem;
+    }
   }
 
-  .item_button {
-    font-weight: 600;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #007bff;
-  }
+
 
   .item_status {
+    border-top: 2px solid #ccc;
     color: #28a745;
     p {
       margin-top: 0.5rem;
       font-weight: 500;
       
-
-      .item_p {
-        color: aqua;
-      }
       span {
         font-weight: 700;
         margin-right: 0.5rem;

@@ -21,14 +21,16 @@ export default function TodoItem({
       )}
       <div className={s.item}>
         <div className={s.item_header}>
-          <h3>{title}</h3>
-          <p>
-            {readMore
-              ? parse(description)
-              : parse(description.substring(0, 250))}
-          
-          </p>
-          <button
+          <h3 className={s.item_title}>{title}</h3>
+          <div className={s.item_description}>
+            {!description ? (
+              <p className={s.item_no_description}>No Description</p>
+            ) : readMore ? (
+              parse(description)
+            ) : (
+              parse(description.substring(0, 250))
+            )}
+            <button
               className={s.item_button}
               onClick={() => {
                 setReadMore(!readMore);
@@ -37,11 +39,11 @@ export default function TodoItem({
               {description?.length <= 250
                 ? ""
                 : readMore
-                ? " . . . Read Less"
-                : " . . . Read More"}
+                ? "Read Less"
+                : "Read More"}
             </button>
+          </div>
 
-          <div className={s.line}></div>
           <div
             className={
               complete === true
@@ -51,7 +53,7 @@ export default function TodoItem({
           >
             <p>
               <span>Status :</span>
-              {complete === true ? "Complete" : "No Complete"}
+              {complete === true ? "Completed" : "Not Completed"}
             </p>
           </div>
           <div className={s.item_icon}>

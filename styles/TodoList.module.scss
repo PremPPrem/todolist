@@ -10,7 +10,7 @@
 }
 
 .list_header {
-  width: 80vw;
+  width: 50vw;
   max-height: fit-content;
   background: #abf2fb;
   margin: 2rem auto 0;
@@ -59,5 +59,18 @@
   }
   .item_status {
     border-top: 20px solid #000;
+  }
+}
+
+
+@media (max-width: 1280px) {
+  .list_header {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .list_header {
+    width: 96vw;
   }
 }

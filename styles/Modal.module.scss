@@ -24,12 +24,14 @@
         display: flex;
         justify-content: flex-end;
         border: none;
-        font-size: 1.2rem;
-        font-weight: 600;
+        font-size: 1.5rem;
+        font-weight: 700;
         width: 20px;
         position: absolute;
-        right: 10px;
+        right: 15px;
+        top: 0;
         background: transparent;
+        cursor: pointer;
 
         &:hover {
           color: #dc3545;
@@ -56,17 +58,26 @@
       .modal_button {
         display: flex;
         justify-content: center;
-        margin-bottom: 1.5rem;
+        margin: 1.5rem 0;
 
   
         .modal_btn_yes {
-          margin-right: 0.4rem;
+          margin-right: 0.5rem;
         }
 
         .modal_btn_no {
-          margin-left: 0.4rem;
+          margin-left: 0.5rem;
         }
       }
+    }
+  }
+}
+
+
+@media (max-width: 500px) {
+  .modal {
+    .modal_header {
+      width: 96%;
     }
   }
 }
