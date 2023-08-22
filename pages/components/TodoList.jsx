@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import s from "@/styles/TodoList.module.scss";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { AiOutlineClear } from "react-icons/ai";
+import { v4 as uuidv4 } from "uuid";
 import TodoItem from "./TodoItem";
 
 export default function TodoList() {
@@ -12,29 +14,44 @@ export default function TodoList() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setErrorTitle("");
     if (title) {
-      setErrorTitle("");
       const newTodo = {
-        id: new Date().getTime().toString(),
+        id: uuidv4(),
         title,
         description,
+        complete: false,
       };
       setTodo([...todo, newTodo]);
       localStorage.setItem("todoList", JSON.stringify([...todo, newTodo]));
       setTitle("");
       setDescription("");
     } else if (!title) {
-        setErrorTitle("Please enter a Title");
+      setErrorTitle("Please enter a Title");
     }
   };
 
   const deleteTodo = (id) => {
-    const deleteTodo = todo.filter((item)=>item.id !== id)
-    localStorage.setItem("todoList", JSON.stringify(deleteTodo));
-    setTodo(deleteTodo);
+    const deleted = todo.filter((item) => item.id !== id);
+    localStorage.setItem("todoList", JSON.stringify(deleted));
+    setTodo(deleted);
   };
 
+  const completeTodo = (id) => {
+    const complete = [...todo].map((item) => {
+      if (item.id === id) {
+        item.complete = !item.complete;
+      }
+      return item;
+    });
+    localStorage.setItem("todoList", JSON.stringify(complete));
+    setTodo(complete);
+  };
+
+  const clear = () => {
+    setTodo([]);
+    localStorage.removeItem("todoList");
+  };
 
   useEffect(() => {
     const saveTodo = JSON.parse(localStorage.getItem("todoList"));
@@ -42,7 +59,6 @@ export default function TodoList() {
       setTodo(saveTodo);
     }
   }, []);
-
 
   return (
     <div>
@@ -68,13 +84,21 @@ export default function TodoList() {
           </div>
           <div className="input-item">
             <button type="submit">
-              <BsPlusCircleFill />
+              <BsPlusCircleFill /> Add
             </button>
           </div>
         </form>
+        <button onClick={clear}><AiOutlineClear /> Delete All</button>
         <div className="list">
           {todo.map((data) => {
-            return <TodoItem key={data.id} {...data} deleteTodo={deleteTodo}  />
+            return (
+              <TodoItem
+                key={data.id}
+                {...data}
+                deleteTodo={deleteTodo}
+                completeTodo={completeTodo}
+              />
+            );
           })}
         </div>
       </div>

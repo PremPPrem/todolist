@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineCheckCircle, AiOutlineDelete } from "react-icons/ai";
 import Modal from "./Modal";
 
-export default function TodoItem({ title, description, id, deleteTodo }) {
+export default function TodoItem({ title, description, id, deleteTodo,completeTodo,complete }) {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
@@ -13,14 +13,14 @@ export default function TodoItem({ title, description, id, deleteTodo }) {
         <h3>{title}</h3>
         <p>{description}</p>
         <div>
-          <p>status : complete</p>
+          <p>Status : {complete === true ? "Complete" : "No Complete"}</p>
         </div>
-        <div className="btn">
+        <div className="">
           <AiOutlineDelete
             className="icon"
             onClick={() => setOpenModal(true)}
           />
-          <AiOutlineCheckCircle className="icon" />
+          <AiOutlineCheckCircle className="icon" onClick={() => completeTodo(id)} />
         </div>
       </div>
     </>
